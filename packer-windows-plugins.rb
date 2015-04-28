@@ -17,6 +17,11 @@ class PackerWindowsPlugins < Formula
 
   def install
     pluginpath = Pathname.new("#{ENV['HOME']}/.packer.d/plugins")
+
+    unless File.directory?(pluginpath)
+      mkdir_p(pluginpath)
+    end
+
     cp_r Dir["*"], pluginpath
     bin.install Dir['*']
   end
